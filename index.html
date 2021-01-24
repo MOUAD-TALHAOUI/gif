@@ -1,0 +1,47 @@
+<html>
+    <title>Gif_Searcher</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+    <script>search = async () => {
+        console.log("ARROW FUNCTION :", this);
+        url = `http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${ document.getElementById("input").value }`;
+        const res = await fetch(url);
+        const json = await res.json();
+        const gifs = json.data.map((datum)=> `<img src='${ datum.images.fixed_width.url }' class="img-fluid" title='${ datum.caption }'/>`);
+        document.getElementById("results").innerHTML = gifs.join("") || `<h1>No Gifs Found...</h1>`;
+    }   
+    </script>
+    <style>
+        body{
+            position: relative;
+            background-image: url("img/bg.gif");
+            color: white;
+            font-family: Nunito;
+            font-weight: bolder;
+        }
+        h1{
+            text-align: center;
+            margin-top: 5vh;
+            font-size: 3rem;
+        }
+        input{
+            margin: 5rem;
+            width: 30rem !important;
+            height: 3.5rem;
+        }
+        form, #results{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for Gifs...</h1>
+    <form class="search" onsubmit="search(); return false;">
+    <input id="input" class="form-control" type="search" placeholder="Type...">
+    </form>
+    <div id="results"></div>
+</body>
+</html>
