@@ -9,7 +9,7 @@
     <script src="js/bootstrap.bundle.js"></script>
     <script>search = async () => {
         console.log("ARROW FUNCTION :", this);
-        url = `http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${ document.getElementById("input").value }`;
+        url = `https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${ document.getElementById("input").value }`;
         const res = await fetch(url);
         const json = await res.json();
         const gifs = json.data.map((datum)=> `<img src='${ datum.images.fixed_width.url }' class="img-fluid" title='${ datum.caption }'/>`);
